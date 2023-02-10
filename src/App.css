@@ -1,8 +1,20 @@
 .App {
   text-align: center;
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--bg-main);
+  font-family: "Outfit", sans-serif;
+  color: var(--colour-blue);
+  font-weight: 300;
+  line-height: 1.6;
+}
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +47,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

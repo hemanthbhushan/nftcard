@@ -10,27 +10,17 @@
 }
 
 /* CSS Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* Project Styles */
-body {
-  background-color: var(--bg-main);
-  font-family: "Outfit", sans-serif;
-  color: var(--colour-blue);
-  font-weight: 300;
-  line-height: 1.6;
-}
+
+
 
 /* .container {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+  /* flex-direction: column; */
+/* } 
 
 /* Card */
 .main-card {

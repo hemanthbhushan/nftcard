@@ -4,7 +4,9 @@ import closeMenu from "./images/icon-close-menu.svg";
 import icon from './images/icon-ethereum.svg';
 import "./Header.css";
 
-const Header = ({ navIsOpen, toggleNav, closeNav }) => {
+const Header = () => {
+
+
   return (
     <header className="header">
       <div className="header-container">
@@ -35,7 +37,7 @@ const Header = ({ navIsOpen, toggleNav, closeNav }) => {
               </a>
             </li>
             <li>
-            <img src={icon}alt="ETH" className="icon"/><a href="/" className="nav-link">
+            <img src={icon}alt="Symbol ETH" className="icon"/><a href="/" className="nav-link">
                 Connect Wallet
               </a>
             </li>

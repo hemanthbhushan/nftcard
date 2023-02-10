@@ -1,13 +1,15 @@
 import React from 'react'
-import NftCard from './NftCard'
+import './App.css'
 import Header from './Header'
 import RenderNftCard from './RenderNftCard'
 
+
+
 const App = () => {
   return (
-    <div>
+    <div className=''>
       <Header/>
-    
+      
       <RenderNftCard/>
       
       </div>

@@ -6,6 +6,7 @@ import equilibrium from './images/image-equilibrium.jpg'
 import view from './images/icon-view.svg'
 import avatar from './images/image-avatar.png'
 import DeadlineCard from './DeadlineCard';
+import ButtonCard from './ButtonCard'
 
 
 const NftCard = ({detail}) => {
@@ -34,8 +35,8 @@ const NftCard = ({detail}) => {
         </div>
         <div className="creator-info">
           <img src={avatar} alt="Jules Wyvern" className="avatar"/>
-          <p className="creator-text">Creation of <span className="creator-name">{detail.composerName}</span></p>
-          <button className='button'>Buy</button>
+          <p className="creator-text">Music By <span className="creator-name">{detail.composerName}</span></p>
+          <ButtonCard>Buy</ButtonCard>
         </div>
       </div>
     </section>
