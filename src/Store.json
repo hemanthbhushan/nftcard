@@ -1,0 +1,18 @@
+[
+    {
+        "songName":"Dark",
+        "deadline":"June, 16, 2023",
+        "priceInEth" : "0.01",
+        "composerName":"Hemanth",
+        "discription":"Our Equilibrium collection promotes balance and calm.",
+        "photoStorage":"./images/image-avatar.png"
+    },
+    {
+        "songName":"Dream",
+        "deadline":"July, 16, 2023",
+        "priceInEth" : "0.07",
+        "composerName":"Bhushan",
+        "discription":"Metal music check the heat of theneeee",
+        "photoStorage":"./images/image-avatar.png"
+    }
+]
