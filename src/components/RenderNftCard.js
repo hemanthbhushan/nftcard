@@ -1,18 +1,12 @@
 import React from 'react'
 import NftCard from './NftCard'
-import details from './Store.json';
+import details from '../Store.json';
 
 
 
 const RenderNftCard = () => {
    
-
-
-
-  
-
-
-  return (
+return (
     details.map((details,index)=><NftCard detail = {details} key={index}/>)
   
   )

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import './NftCard.css';
-import icon from './images/icon-ethereum.svg';
-import clock from './images/icon-clock.svg'
-import equilibrium from './images/image-equilibrium.jpg'
-import view from './images/icon-view.svg'
-import avatar from './images/image-avatar.png'
+import icon from '../images/icon-ethereum.svg';
+import clock from '../images/icon-clock.svg'
+import equilibrium from '../images/image-equilibrium.jpg'
+import view from '../images/icon-view.svg'
+import avatar from '../images/image-avatar.png'
 import DeadlineCard from './DeadlineCard';
 import ButtonCard from './ButtonCard'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
-import Header from './Header'
-import RenderNftCard from './RenderNftCard'
+import Header from './components/Header'
+import RenderNftCard from './components/RenderNftCard'
 
 
 

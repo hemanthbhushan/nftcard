@@ -1,0 +1,1 @@
+export const closedSea = "0xc3B6B0E93d2bFd66b611b55cB9d76d605Bf1bf7a";
