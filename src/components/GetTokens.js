@@ -1,16 +1,34 @@
 import React from 'react';
 import './GetTokens.css'
-/////
-import './NftCard.css';
+import { ethers, BigNumber } from "ethers";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import icon from '../images/icon-ethereum.svg';
-import clock from '../images/icon-clock.svg'
-import equilibrium from '../images/image-equilibrium.jpg'
-import view from '../images/icon-view.svg'
-import avatar from '../images/image-avatar.png'
-import DeadlineCard from './DeadlineCard';
 import ButtonCard from './ButtonCard'
 
-const GetTokens = ({detail}) => {
+const GetTokens = () => {
+
+
+  const formik = useFormik({
+    initialValues: {
+      fromToken: "",
+      toToken: "",
+      amountIn: "",
+      toAddress:"",
+    },
+    validationSchema: Yup.object({
+        addressToken1: Yup.string().oneOf(["0xB4FBF271143F4FBf7B91A5ded31805e42b2208d6","0x73967c6a0904aa032c103b4104747e88c566b1a2","0x509ee0d083ddf8ac028f2a56731412edd63223b9"]).required("Required"),
+        addressToken2: Yup.string().oneOf(["0xBE9ac76dB19b0135D493fa8fFfD7b6093d871432"]).required("Required"),
+        amountIn: Yup.string().required("Required"),
+        toAddress: Yup.string().required("Required"),
+    }),
+    onSubmit:  async (values) => {
+
+
+
+        },
+});
+
   return (
     
     <div>
@@ -21,7 +39,7 @@ const GetTokens = ({detail}) => {
     <span class="custom-dropdown big image-container">
      <select> 
             <option>Select One</option>   
-            <img src={icon}alt="ETH" className="icon"/> <option>Ethereum</option>
+            <option>Ethereum</option>
             <option>DAI</option>  
             <option>USDC</option>
             
