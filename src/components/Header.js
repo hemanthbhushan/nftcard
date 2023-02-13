@@ -1,8 +1,9 @@
 import React,{useState} from 'react'
-import { getAccount,getChainId } from '../commonEthFunc'
-
+import { getAccount,getDecimals} from '../commonEthFunc';
 import logo from "../images/logo.svg";
 import icon from '../images/icon-ethereum.svg';
+// import icon from '../images/music-svgrepo-com.svg';
+
 import "./Header.css";
 import BalanceCard from './BalanceCard';
 
@@ -18,7 +19,7 @@ const Header = () => {
   const [account, setAccount] = useState(null);
   const [chainId, setChainId] = useState(null)
   const [connButtonText, setConnButtonText] = useState("Connect Wallet");
-  const [balance, setBalance] = useState(null)
+  const [balance, setBalance] = useState("Balance")
 
   const connectWalletHandler = async() => {
    
@@ -47,41 +48,35 @@ const balanceHandler = async ()=>{
   const provider =  getProvider();
   const signer  = await getSigner(provider);
   const contract = await getContract(closedSea,signer);
-   const balance  = await contract.balanceOf(signer.address)
-   console.log('balance ', balance )
-   setBalance(balance);
+  const _balance  = await contract.balanceOf(signer.address)
+  const decimals =await getDecimals(contract)
+    
+   setBalance(_balance);
+   check()
 }
 
 
-  // update account, will cause component re-render
+const check = ()=>console.log('balance out ', balance)
+ 
+// update account, will cause component re-render
   const accountChangedHandler = (newAccount) => {
     setAccount(newAccount);
    
   };
 
-  const chainChangedHandler = () => {
+ const chainChangedHandler = () => {
+
     // reload the page to avoid any errors with chain change mid use of application
     window.location.reload();
   };
   
-
-   // listen for account changes
+  // listen for account changes
     if(window.ethereum && window.ethereum.isMetaMask){
       window.ethereum.on("accountsChanged", accountChangedHandler);
   
     window.ethereum.on("chainChanged", chainChangedHandler);
   
     }
-    
-  
-
-
-
- 
-  
-  
-
-  
   return (
     <header className="header">
       <div className="header-container">
@@ -98,31 +93,28 @@ const balanceHandler = async ()=>{
           <ul className="nav-links">
             <li>
               <a href="/"  className="nav-link">
-                About
+                Home
               </a>
             </li>
             <li>
               <a href="/"  className="nav-link">
-                Discover
+               Market Place
               </a>
             </li>
             <li>
               <a href="/" className="nav-link">
-                Get Tokens
+              Get Tokens
               </a>
             </li>
             <li>
             <span className="icon"> 🤖</span>
             <span className="nav-link" onClick={()=>connectWalletHandler()}>{connButtonText}</span>
             </li> 
-            {balance? <>
+            <>
               <li>
             <img src={icon}alt="ETH" className="icon"/>
             <span className="nav-link" >{balance}</span>
-            </li></> : "" 
-            
-
-            }
+            </li></> 
                     
           </ul>
         </nav>

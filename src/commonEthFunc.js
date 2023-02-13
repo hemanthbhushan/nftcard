@@ -30,3 +30,13 @@ export async function getAccount() {
 export async function getChainId() {
   return await window.ethereum.request({ method: "eth_chainId" });
 }
+
+export async function getDecimals(token) {
+  const decimals = await token.decimals().then((result) => {
+      return result;
+    }).catch((error) => {
+      console.log('No tokenDecimals function for this token, set to 0');
+      return 0;
+    });
+    return decimals;
+}
