@@ -1,11 +1,11 @@
-/* .container {
+/* .containerb {
 	width: 1000px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 } */
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
-.container .btn {
+.containerb .btn {
 	position: relative;
 	top: 0;
 	left: 0;
@@ -16,7 +16,7 @@
 	justify-content: center;
 	align-items: center;
 }
-.container .btn a {
+.containerb .btn a {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -40,10 +40,10 @@
 	transition: 0.5s;
 	backdrop-filter: blur(15px);
 }
-.container .btn:hover a {
+.containerb .btn:hover a {
 	letter-spacing: 3px;
 }
-.container .btn a::before {
+.containerb .btn a::before {
 	content: "";
 	position: absolute;
 	top: 0;
@@ -55,10 +55,10 @@
 	transition: 0.5s;
 	filter: blur(0px);
 }
-.container .btn:hover a::before {
+.containerb .btn:hover a::before {
 	transform: skewX(45deg) translate(200px);
 }
-.container .btn::before {
+.containerb .btn::before {
 	content: "";
 	position: absolute;
 	left: 50%;
@@ -71,14 +71,14 @@
 	transition: 0.5s;
 	transition-delay: 0.5;
 }
-.container .btn:hover::before /*lightup button*/ {
+.containerb .btn:hover::before /*lightup button*/ {
 	bottom: 0;
 	height: 50%;
 	width: 80%;
 	border-radius: 30px;
 }
 
-.container .btn::after {
+.containerb .btn::after {
 	content: "";
 	position: absolute;
 	left: 50%;
@@ -91,26 +91,26 @@
 	transition: 0.5s;
 	transition-delay: 0.5;
 }
-.container .btn:hover::after /*lightup button*/ {
+.containerb .btn:hover::after /*lightup button*/ {
 	top: 0;
 	height: 50%;
 	width: 80%;
 	border-radius: 30px;
 }
-/* .container .btn:nth-child(1)::before, /*chnage 1*/
-.container .btn:nth-child(1)::after {
+/* .containerb .btn:nth-child(1)::before, /*chnage 1*/
+.containerb .btn:nth-child(1)::after {
 	background: #ff1f71;
 	box-shadow: 0 0 5px #ff1f71, 0 0 15px #ff1f71, 0 0 30px #ff1f71,
 		0 0 60px #ff1f71;
 } */
-.container .btn:nth-child(2)::before, /* 2*/
-.container .btn:nth-child(2)::after {
+.containerb .btn:nth-child(2)::before, /* 2*/
+.containerb .btn:nth-child(2)::after {
 	background: #2db2ff;
 	box-shadow: 0 0 5px #2db2ff, 0 0 15px #2db2ff, 0 0 30px #2db2ff,
 		0 0 60px #2db2ff;
 }
-.container .btn:nth-child(3)::before, /* 3*/
-.container .btn:nth-child(3)::after {
+.containerb .btn:nth-child(3)::before, /* 3*/
+.containerb .btn:nth-child(3)::after {
 	background: #1eff45;
 	box-shadow: 0 0 5px #1eff45, 0 0 15px #1eff45, 0 0 30px #1eff45,
 		0 0 60px #1eff45;

@@ -115,3 +115,7 @@
     -webkit-transform: translateY(-4rem);
     transform: translateY(-4rem);
   }
+  .error{
+    font-family: 'Roboto', sans-serif;
+    color: rgb(255, 0, 0);
+  }

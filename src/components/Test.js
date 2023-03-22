@@ -4,47 +4,59 @@ import { ethers, BigNumber } from "ethers";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import icon from '../images/icon-ethereum.svg';
-// import ButtonCard from './ButtonCard';
-import './ButtonCard.css'
+import ButtonCard from './ButtonCard';
+import { getAmountOut,getProvider,getSigner,getRouter ,getAccount} from '../commonEthFunc';
+
 
 import {
   Ethereum,
   DAI,
-  USDT
+  USDT,
+  router_address
 } from '../constants/Address/addressStore.js'
 
-const GetTokens = () => {
+const Test = ({connected}) => {
   const [formToken, setFormToken] = useState(null)
+  const [amountOut, setAmountOut] = useState(null)
 
   const formik = useFormik({
     initialValues: {
-      fromToken: "",
-      fromAmount:"",
-      toToken: "",
-      toAmount:""
+        fromToken: "",
+        fromAmount:"",
+        toToken: "",
+        toAmount:""
     },
     validationSchema: Yup.object({
-      fromToken: Yup.string().oneOf([Ethereum,DAI,USDT]).required("Required"),
-      // fromAmount: Yup.string().required("Required"),  
-      fromAmount: Yup.string().matches(
-        /(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/,
-        "not valid"
-      ).required("Required"), 
-     
-
-       toToken: Yup.string().required("Required"),
+        // fromToken: Yup.string().oneOf([Ethereum,DAI,USDT]).required("Required"),
+        // fromAmount: Yup.string().required("Required"),  
+        // fromAmount: Yup.string().matches(
+        //   /(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/,
+        //   "not valid"
+        // ).required("Required"), 
+       
+  
+        //  toToken: Yup.string().required("Required"),
     }),
-    onSubmit:  async (values) => {
+    onSubmit: async (values, { resetForm }) => {
+     
+      
+        const provider = getProvider();
+        const signer = await getSigner(provider)
+        const routerContract =getRouter(router_address,signer)  
+        console.log('signer , routerContract', signer , await routerContract.factory())     
 
-      console.log('values.fromAmount', values.fromAmount)
+      const amountOut =  await getAmountOut(values.fromToken,values.toToken,values.toAmount,routerContract,signer);
+     console.log('amountOut', amountOut)
+     
+        
+        
+       
+    }
 
-
-
-        },
-});
-
+      
+  });
   return (
-    
+     
     <div>
     <form  onSubmit={formik.handleSubmit}>
     <main className="container">
@@ -77,17 +89,16 @@ const GetTokens = () => {
       </span>
    
       <div className="text-container">
-      <h1 className="title">YOU GET</h1>
+      <h1 className="title">YOU GET {amountOut} </h1>
        
         <div className="creator-info">
-        {/* <div className="containerb">
-           <div className="btn" type="submit" ><a>Swap</a></div>
-
-         </div> */}
+       
          
-         {/* <ButtonCard type="submit"/> */}
+         
         </div>
-        <button className='btn' type="submit">Send</button>
+        <button className='btn' type="submit">SWAP</button>
+
+     
       </div>
       
     </section>
@@ -97,7 +108,8 @@ const GetTokens = () => {
 
  
 </div>
+   
   )
 }
 
-export default GetTokens
+export default Test
