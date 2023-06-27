@@ -13,7 +13,7 @@ const Header = () => {
   const [account, setAccount] = useState(null);
   const [chainId, setChainId] = useState(null);
   const [connButtonText, setConnButtonText] = useState("Connect Wallet");
-  const [balance, setBalance] = useState(1);
+  const [balance, setBalance] = useState("Balance");
   const [connected, setConnected] = useState(true);
 
   const connectWalletHandler = async () => {
@@ -42,16 +42,16 @@ const Header = () => {
   };
 
   const balanceHandler = async () => {
-    console.log("first")
+   
     const provider = getProvider();
     const signer = await getSigner(provider);
     const contract = await getContract(NUSD, signer);
-    
+
     const _balance = await contract.balanceOf(signer.address);
     console.log(_balance);
     const decimals = await getDecimals(contract);
 
-    setBalance(12222);
+    setBalance(ethers.formatEther(_balance));
   };
 
   // update account, will cause component re-render
