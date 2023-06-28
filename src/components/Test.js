@@ -29,6 +29,7 @@ const Test = ({ connected }) => {
         const contract = await getContract(NUSD, signer);
         const val = values.deposit;
 
+        console.log(contract, "val");
         await contract.deposit({ value: val.toString() });
       } catch {
         console.error();
