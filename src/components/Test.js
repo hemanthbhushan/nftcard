@@ -1,115 +1,128 @@
-import React,{useState} from 'react';
-import './GetTokens.css'
-import { ethers, BigNumber } from "ethers";
+import React, { useState } from "react";
+import "./GetTokens.css";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import icon from '../images/icon-ethereum.svg';
-import ButtonCard from './ButtonCard';
-import { getAmountOut,getProvider,getSigner,getRouter ,getAccount} from '../commonEthFunc';
 
+import { getProvider, getSigner, getContract } from "../commonEthFunc";
+import { NUSD } from "../constants/Address/addressStore.js";
+// const { BigNumber } = require("ethers");
 
-import {
-  Ethereum,
-  DAI,
-  USDT,
-  router_address
-} from '../constants/Address/addressStore.js'
+// function expandTo18Decimals(n) {
+//   return BigNumber.from(n).mul(BigNumber.from(10).pow(18));
+// }
 
-const Test = ({connected}) => {
-  const [formToken, setFormToken] = useState(null)
-  const [amountOut, setAmountOut] = useState(null)
+const Test = ({ connected }) => {
+  const [amountOut, setAmountOut] = useState(null);
 
-  const formik = useFormik({
+  const depositFormik = useFormik({
     initialValues: {
-        fromToken: "",
-        fromAmount:"",
-        toToken: "",
-        toAmount:""
+      deposit: "",
     },
     validationSchema: Yup.object({
-        // fromToken: Yup.string().oneOf([Ethereum,DAI,USDT]).required("Required"),
-        // fromAmount: Yup.string().required("Required"),  
-        // fromAmount: Yup.string().matches(
-        //   /(?=.*?\d)^\$?(([1-9]\d{0,2}(,\d{3})*)|\d+)?(\.\d{1,2})?$/,
-        //   "not valid"
-        // ).required("Required"), 
-       
-  
-        //  toToken: Yup.string().required("Required"),
+      deposit: Yup.string().required("Required"),
     }),
     onSubmit: async (values, { resetForm }) => {
-     
-      
+      try {
         const provider = getProvider();
-        const signer = await getSigner(provider)
-        const routerContract =getRouter(router_address,signer)  
-        console.log('signer , routerContract', signer , await routerContract.factory())     
+        const signer = await getSigner(provider);
+        const contract = await getContract(NUSD, signer);
+        const val = values.deposit;
 
-      const amountOut =  await getAmountOut(values.fromToken,values.toToken,values.toAmount,routerContract,signer);
-     console.log('amountOut', amountOut)
-     
-        
-        
-       
-    }
+        await contract.deposit({ value: val.toString() });
+      } catch {
+        console.error();
+      }
+    },
+  });
+  const redeemFormik = useFormik({
+    initialValues: {
+      redeem: "",
+    },
+    validationSchema: Yup.object({
+      redeem: Yup.string().required("Required"),
+    }),
+    onSubmit: async (values, { resetForm }) => {
+      try {
+        const provider = getProvider();
+        const signer = await getSigner(provider);
+        const contract = await getContract(NUSD, signer);
+        const val = values.redeem;
+        console.log(val, "val");
 
-      
+        await contract.redeem(val.toString());
+      } catch {
+        console.error();
+      }
+    },
   });
   return (
-     
     <div>
-    <form  onSubmit={formik.handleSubmit}>
-    <main className="container">
-    <section className="main-card">
-    <h1 className="title">Swap</h1>
-    <span className="custom-dropdown big image-container">
-     <select 
-      id='fromToken'
-      name='fromToken'
-      placeholder='Select One'
-      type = 'text'
-      {...formik.getFieldProps("fromToken")}
-        > 
-            <option value = "">Select One</option>   
-            <option value={Ethereum}>Ethereum</option>
-            <option value={DAI}>DAI</option>  
-            <option value={USDT}>USDT</option>
-            
-        </select>
-     </span>
-    <span className="far fa-user">
-          <div class="form__group">
-            <input type="text" className="form__input" id="fromAmount" placeholder="Enter Amount" min="1" {...formik.getFieldProps("fromAmount")} />
-            {/* <label for="fromAmount" className="form__label">Enter Amount</label> */}
-            {formik.touched.fromAmount  ? (
-           <div className='error' >{formik.errors.fromAmount}</div>
-            ) : null}
-          </div>
-            
-      </span>
-   
-      <div className="text-container">
-      <h1 className="title">YOU GET {amountOut} </h1>
-       
-        <div className="creator-info">
-       
-         
-         
-        </div>
-        <button className='btn' type="submit">SWAP</button>
+      <form onSubmit={depositFormik.handleSubmit}>
+        <main className="container">
+          <section className="main-card">
+            <h1 className="title">GetEthBackedToken</h1>
 
-     
-      </div>
-      
-    </section>
-  </main>
-     
-  </form> 
+            <span className="far fa-user">
+              <div className="form__group">
+                <label>deposit ETH</label>
+                <input
+                  type="text"
+                  className="form__input"
+                  id="deposit"
+                  placeholder="Enter Amount"
+                  {...depositFormik.getFieldProps("deposit")}
+                />
 
- 
-</div>
-   
-  )
-}
+                {depositFormik.touched.deposit ? (
+                  <div className="error">{depositFormik.errors.deposit}</div>
+                ) : null}
+              </div>
+            </span>
 
-export default Test
+            <div className="text-container">
+              <div className="creator-info">GEt</div>
+              <button className="btn" type="submit">
+                Deposit
+              </button>
+            </div>
+          </section>
+        </main>
+      </form>
+
+      <form onSubmit={redeemFormik.handleSubmit}>
+        <main className="container">
+          <section className="main-card">
+            <h1 className="title">redeemToken</h1>
+
+            <span className="far fa-user">
+              <div className="form__group">
+                <label>Reedim ETH</label>
+                <input
+                  type="text"
+                  className="form__input"
+                  id="redeem"
+                  placeholder="Enter Amount"
+                  {...redeemFormik.getFieldProps("redeem")}
+                />
+                {/* <label for="fromAmount" className="form__label">Enter Amount</label> */}
+                {depositFormik.touched.redeem ? (
+                  <div className="error">{redeemFormik.errors.redeem}</div>
+                ) : null}
+              </div>
+            </span>
+
+            <div className="text-container">
+              <div className="creator-info"></div>
+              <button className="btn" type="submit">
+                Redeem
+              </button>
+            </div>
+          </section>
+        </main>
+      </form>
+    </div>
+  );
+};
+
+export default Test;
