@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { getAccount, getDecimals } from "../commonEthFunc";
-import logo from "../images/logo.svg";
+
 import icon from "../images/icon-ethereum.svg";
 
 import "./Header.css";
@@ -42,7 +42,6 @@ const Header = () => {
   };
 
   const balanceHandler = async () => {
-   
     const provider = getProvider();
     const signer = await getSigner(provider);
     const contract = await getContract(NUSD, signer);
@@ -78,28 +77,13 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header-container">
-        <img src={logo} alt="" className="logo" />
+        <img src={icon} alt="" className="logo" />
         <button className="menu-btn">
           <img alt="" className="menu-btn-icon" />
         </button>
         <nav>
           <ul className="nav-links">
-            <li>
-              <a href="/" className="nav-link">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="/" className="nav-link">
-                Market Place
-              </a>
-            </li>
-            <li>
-              <a href="/" className="nav-link">
-                Get Tokens
-              </a>
-            </li>
-            <li>
+            <li><span className="nav-link">Wallet Address</span></li><li>
               <span className="icon"> 🤖</span>
               <span className="nav-link" onClick={() => connectWalletHandler()}>
                 {connButtonText}

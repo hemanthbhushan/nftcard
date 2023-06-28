@@ -1,29 +1,17 @@
-import React from 'react'
-import './App.css'
-import Header from './components/Header'
-import RenderNftCard from './components/RenderNftCard';
-import GetTokens from './components/GetTokens';
-import Home from './components/Home';
-import Test from './components/Test';
-
-
+import React from "react";
+import "./App.css";
+import Header from "./components/Header";
+import RenderNftCard from "./components/RenderNftCard";
+import Test from "./components/Test";
 
 const App = () => {
   return (
-    <div className=''>
-    
-    
-    <Header/>
-    
-    {/* <RenderNftCard/> */}
-    <Test/>
-    {/* <GetTokens/> */}
-      
-      
-      
-      
-      </div>
-  )
-}
+    <div className="">
+      <Header />
 
-export default App
+      <Test />
+    </div>
+  );
+};
+
+export default App;

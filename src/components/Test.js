@@ -6,15 +6,8 @@ import * as Yup from "yup";
 
 import { getProvider, getSigner, getContract } from "../commonEthFunc";
 import { NUSD } from "../constants/Address/addressStore.js";
-// const { BigNumber } = require("ethers");
-
-// function expandTo18Decimals(n) {
-//   return BigNumber.from(n).mul(BigNumber.from(10).pow(18));
-// }
 
 const Test = ({ connected }) => {
-  const [amountOut, setAmountOut] = useState(null);
-
   const depositFormik = useFormik({
     initialValues: {
       deposit: "",
@@ -71,7 +64,7 @@ const Test = ({ connected }) => {
                   type="text"
                   className="form__input"
                   id="deposit"
-                  placeholder="Enter Amount"
+                  placeholder="ETH in wei"
                   {...depositFormik.getFieldProps("deposit")}
                 />
 
@@ -82,7 +75,7 @@ const Test = ({ connected }) => {
             </span>
 
             <div className="text-container">
-              <div className="creator-info">GEt</div>
+              <div className="creator-info"></div>
               <button className="btn" type="submit">
                 Deposit
               </button>
@@ -103,7 +96,7 @@ const Test = ({ connected }) => {
                   type="text"
                   className="form__input"
                   id="redeem"
-                  placeholder="Enter Amount"
+                  placeholder="Token Amount"
                   {...redeemFormik.getFieldProps("redeem")}
                 />
                 {/* <label for="fromAmount" className="form__label">Enter Amount</label> */}
